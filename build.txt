@@ -1,0 +1,3 @@
+displayName = Extra World Sizes
+author = Remurin
+version = 0.1
