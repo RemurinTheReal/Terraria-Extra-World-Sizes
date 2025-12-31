@@ -98,11 +98,11 @@ public static class ExtraUIWorldCreation
         };
         
         var descriptions = new LocalizedText[] {
-            Language.GetOrRegister(mod.GetLocalizationKey("UI.WorldDescriptionSizeTiny"), () => "Compact for challenges and quick testing."),
+            Language.GetOrRegister(mod.GetLocalizationKey("UI.WorldDescriptionSizeTiny"), () => "Quick and compact for unique challenges and testing."),
             Language.GetText("UI.WorldDescriptionSizeSmall"),
             Language.GetText("UI.WorldDescriptionSizeMedium"),
             Language.GetText("UI.WorldDescriptionSizeLarge"),
-            Language.GetOrRegister(mod.GetLocalizationKey("UI.WorldDescriptionSizeHuge"), () => "Oversized for endless discovery or large servers.")
+            Language.GetOrRegister(mod.GetLocalizationKey("UI.WorldDescriptionSizeHuge"), () => "Oversized for near endless exploration or large servers.")
         };
 
         var colors = new Color[] {
