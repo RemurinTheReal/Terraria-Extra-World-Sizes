@@ -50,8 +50,13 @@ public static class ExtraUIWorldCreation
         AssignRandomWorldName(self);
         AssignRandomWorldSeed(self);
         UpdateInputFields(self);
-
+        
+        var config = ModContent.GetInstance<ExtraConfig>();
+        
         _sizeChoice = ModContent.GetInstance<ExtraConfig>().DefaultWorldSize;
+        if (_sizeChoice == WorldSizeID.Huge && !config.EnableHugeWorldSize) _sizeChoice = WorldSizeID.Large;
+        if (_sizeChoice == WorldSizeID.Tiny && !config.EnableTinyWorldSize) _sizeChoice = WorldSizeID.Small;
+
         foreach (var button in _sizeButtons) button.SetCurrentOption(_sizeChoice);
 
         var difficultyButtons = (Array)typeof(UIWorldCreation).GetField("_difficultyButtons", BindingFlags.Instance | BindingFlags.NonPublic)?.GetValue(self);
