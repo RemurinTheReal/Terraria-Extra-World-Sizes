@@ -1,4 +1,4 @@
-This mod simply adds two new world size options to world creation, similar to 3DS Tiny World and 64bit's Extra Large World.
+This mod simply adds two new world size options to world creation, similar to 3DS' Tiny World and 64bit's Extra Large World.
 - Tiny: 2000x900
 - Huge: 10500x3000
 
@@ -7,6 +7,6 @@ This mod simply adds two new world size options to world creation, similar to 3D
 This mod is unfinished, and while it should be safe for production, bugs may arise.
 Currently, it does not add unique preview plate sprites or button icons for added sizes, which may or may not be added at a later date.
 
-Additionally, this mod is not testing with other world generation mods, and explicit compatibility will only be added on a "will trying to add this make me not want to kill myself" basis.
+Additionally, this mod is not tested with other world generation mods, and explicit compatibility will only be added on a "will trying to add this make me not want to kill myself" basis.
 
-Report issues and/or suggestions on the [url=https://github.com/RemurinTheReal/Terraria-Extra-World-Sizes/issues] GitHub issues tracker [/url].
+Report issues and/or suggestions on the [url=https://github.com/RemurinTheReal/Terraria-Extra-World-Sizes/issues] GitHub issues tracker [/url].[quote=tModLoader ExtraWorldSizes]
