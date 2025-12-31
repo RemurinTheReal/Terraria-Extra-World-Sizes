@@ -14,7 +14,6 @@ namespace ExtraWorldSizes.Core
         
         public override void Load()
         {
- 
             const int sectionWidth = ((ExtraWorldGen.WorldSizeHugeX - 1) / Main.sectionWidth + 1) * Main.sectionWidth;
             const int sectionHeight = ((ExtraWorldGen.WorldSizeHugeY - 1) / Main.sectionHeight + 1) * Main.sectionHeight;
 
