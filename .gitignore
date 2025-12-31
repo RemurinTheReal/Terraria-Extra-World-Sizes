@@ -1,0 +1,15 @@
+/src
+/setup/logs
+**/bin/
+**/obj/
+**/packages/
+.vs
+*.user
+*.suo
+*.cache
+*.force
+**/packages/
+**/.vs/
+**/.idea/
+/artifacts
+**/msbuild.binlog
