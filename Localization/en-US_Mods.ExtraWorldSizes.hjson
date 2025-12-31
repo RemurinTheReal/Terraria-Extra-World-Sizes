@@ -1,1 +1,49 @@
-Configs.ExtraConfig.DisplayName: Extra Config
+Configs: {
+	ExtraConfig: {
+		DisplayName: Extra Config
+
+		EnableTinyWorldSize: {
+			Label: Enable Tiny World Size
+			Tooltip: ""
+		}
+
+		EnableHugeWorldSize: {
+			Label: Enable Huge World Size
+			Tooltip: ""
+		}
+
+		DefaultWorldSize: {
+			Label: Default World Size
+			Tooltip: ""
+		}
+	}
+
+	WorldSizeID: {
+		Tooltip: ""
+
+		Tiny: {
+			Label: Tiny
+			Tooltip: ""
+		}
+
+		Small: {
+			Label: Small
+			Tooltip: ""
+		}
+
+		Medium: {
+			Label: Medium
+			Tooltip: ""
+		}
+
+		Large: {
+			Label: Large
+			Tooltip: ""
+		}
+
+		Huge: {
+			Label: Huge
+			Tooltip: ""
+		}
+	}
+}
