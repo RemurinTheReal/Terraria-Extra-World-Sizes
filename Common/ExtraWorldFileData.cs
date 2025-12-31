@@ -11,29 +11,22 @@ public static class ExtraWorldFileData
     public static void OnLoad() => On_WorldFileData.SetWorldSize += On_SetWorldSize;
     public static void OnUnload() =>  On_WorldFileData.SetWorldSize -= On_SetWorldSize;
     
-    private static void On_SetWorldSize(On_WorldFileData.orig_SetWorldSize orig, WorldFileData self, int x, int y)
+    #region Hooks
+    private static void On_SetWorldSize(On_WorldFileData.orig_SetWorldSize _, WorldFileData self, int x, int __)
     {
         var mod = ModContent.GetInstance<ExtraMain>();
+        if (mod == null) return;
         
-        switch (x) {
-            case ExtraWorldGen.WorldSizeTinyX:
-                self._worldSizeName = Language.GetOrRegister(mod.GetLocalizationKey("UI.WorldSizeTiny"), () => "Tiny");
-                break;
-            case WorldGen.WorldSizeSmallX:
-                self._worldSizeName = Language.GetText("UI.WorldSizeSmall");
-                break;
-            case WorldGen.WorldSizeMediumX:
-                self._worldSizeName = Language.GetText("UI.WorldSizeMedium");
-                break;
-            case WorldGen.WorldSizeLargeX:
-                self. _worldSizeName = Language.GetText("UI.WorldSizeLarge");
-                break;
-            case ExtraWorldGen.WorldSizeHugeX:
-                self._worldSizeName = Language.GetOrRegister(mod.GetLocalizationKey("UI.WorldSizeHuge"), () => "Huge");
-                break;
-            default:
-                self._worldSizeName = Language.GetText("UI.WorldSizeUnknown");
-                break;
-        }
+        self._worldSizeName = x switch
+        {
+            ExtraWorldGen.WorldSizeTinyX => Language.GetOrRegister(mod.GetLocalizationKey("UI.WorldSizeTiny"), () => "Tiny"),
+            WorldGen.WorldSizeSmallX => Language.GetText("UI.WorldSizeSmall"),
+            WorldGen.WorldSizeMediumX => Language.GetText("UI.WorldSizeMedium"),
+            WorldGen.WorldSizeLargeX => Language.GetText("UI.WorldSizeLarge"),
+            ExtraWorldGen.WorldSizeHugeX => Language.GetOrRegister(mod.GetLocalizationKey("UI.WorldSizeHuge"), () => "Huge"),
+            
+            _ => Language.GetText("UI.WorldSizeUnknown")
+        };
     }
+    #endregion
 }
