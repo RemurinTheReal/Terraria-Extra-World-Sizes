@@ -1,1 +1,3 @@
-Modify this file with a description of your mod.
+This mod simply adds two new world size options to world creation.
+- Tiny: 2000x900
+- Huge: 10500x3000
