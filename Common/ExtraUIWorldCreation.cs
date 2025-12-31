@@ -95,7 +95,7 @@ public static class ExtraUIWorldCreation
         var titles = new LocalizedText[] {
             Language.GetOrRegister(mod.GetLocalizationKey("UI.WorldSizeTiny"), () => "Tiny"),
             Lang.menu[92],
-            config.EnableCompactMediumWorldTitle ?  Language.GetOrRegister(mod.GetLocalizationKey("UI.WorldSizeHMedium"), () => "Med.") : Lang.menu[93],
+            config.EnableHugeWorldSize && config.EnableTinyWorldSize ? Language.GetOrRegister(mod.GetLocalizationKey("UI.WorldSizeHMedium"), () => "Med.") : Lang.menu[93],
             Lang.menu[94],
             Language.GetOrRegister(mod.GetLocalizationKey("UI.WorldSizeHuge"), () => "Huge")
         };

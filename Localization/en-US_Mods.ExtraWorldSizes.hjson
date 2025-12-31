@@ -16,6 +16,11 @@ Configs: {
 			Label: Default World Size
 			Tooltip: ""
 		}
+
+		EnableCompactMediumWorldTitle: {
+			Label: Enable Compact Medium World Title
+			Tooltip: ""
+		}
 	}
 
 	WorldSizeID: {
