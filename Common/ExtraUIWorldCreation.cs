@@ -26,6 +26,7 @@ public static class ExtraUIWorldCreation
     private static MethodInfo _updatePreviewPlateMethod;
     
     private static FieldInfo _descriptionTextField;
+    private static FieldInfo _optionSizeField;
     #endregion
     
     public static void OnLoad()
@@ -220,6 +221,9 @@ public static class ExtraUIWorldCreation
     {
         var groupOptionButton = listeningElement as GroupOptionButton<WorldSizeID>;
         if (groupOptionButton == null) return;
+        
+        _optionSizeField ??= typeof(UIWorldCreation).GetField("_optionSize", BindingFlags.Instance | BindingFlags.NonPublic);
+        _optionSizeField?.SetValue(self, Math.Clamp((int)groupOptionButton.OptionValue - 1, 0, 2));
         
         _sizeChoice = groupOptionButton.OptionValue;
         
