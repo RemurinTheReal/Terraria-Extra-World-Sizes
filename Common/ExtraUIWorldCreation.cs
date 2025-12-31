@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Microsoft.Xna.Framework;
 using ExtraWorldSizes.Core;
@@ -89,10 +90,12 @@ public static class ExtraUIWorldCreation
         var mod = ModContent.GetInstance<ExtraMain>();
         if (mod == null) return;
         
+        var config = ModContent.GetInstance<ExtraConfig>();
+        
         var titles = new LocalizedText[] {
             Language.GetOrRegister(mod.GetLocalizationKey("UI.WorldSizeTiny"), () => "Tiny"),
             Lang.menu[92],
-            Language.GetOrRegister(mod.GetLocalizationKey("UI.WorldSizeHMedium"), () => "Med."),
+            config.EnableCompactMediumWorldTitle ?  Language.GetOrRegister(mod.GetLocalizationKey("UI.WorldSizeHMedium"), () => "Med.") : Lang.menu[93],
             Lang.menu[94],
             Language.GetOrRegister(mod.GetLocalizationKey("UI.WorldSizeHuge"), () => "Huge")
         };
@@ -121,18 +124,26 @@ public static class ExtraUIWorldCreation
             "Images/UI/WorldCreation/IconSizeLarge"
         };
         
-        var config = ModContent.GetInstance<ExtraConfig>();
 
-        _sizeButtons = new GroupOptionButton<WorldSizeID>[worldSizeIDs.Length];
-        for (var i = 0; i < _sizeButtons.Length; i++) {
+        var enabledSizes = new List<WorldSizeID>();
+        for (var i = 0; i < worldSizeIDs.Length; i++)
+        {
             switch (i)
             {
                 case (int)WorldSizeID.Tiny when !config.EnableTinyWorldSize:
-                case (int)WorldSizeID.Huge when !config.EnableHugeWorldSize:
+                case (int)WorldSizeID.Huge when !config.EnableHugeWorldSize: 
                     continue;
+                default:
+                    enabledSizes.Add(worldSizeIDs[i]); break;
             }
-
-            var groupOptionButton = new GroupOptionButton<WorldSizeID>(worldSizeIDs[i], titles[i], descriptions[i], colors[i], icons[i], 1f, 1f, 16f)
+        } 
+        
+        _sizeButtons = new GroupOptionButton<WorldSizeID>[enabledSizes.Count];
+        
+        for (var i = 0; i < _sizeButtons.Length; i++)
+        {
+            var sizeID = (int)enabledSizes[i];
+            var groupOptionButton = new GroupOptionButton<WorldSizeID>((WorldSizeID)sizeID, titles[sizeID], descriptions[sizeID], colors[sizeID], icons[sizeID], 1f, 1f, 16f)
             {
                 Width = StyleDimension.FromPixelsAndPercent(-1 * (_sizeButtons.Length - 1), 1f / _sizeButtons.Length * usableWidthPercent),
                 Left = StyleDimension.FromPercent(1f - usableWidthPercent),

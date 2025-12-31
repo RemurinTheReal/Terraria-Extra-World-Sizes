@@ -11,5 +11,6 @@ public sealed class ExtraConfig : ModConfig
     [DefaultValue(true)] public bool EnableTinyWorldSize { get; set; }
     [DefaultValue(true)] public bool EnableHugeWorldSize { get; set; }
     
+    [DefaultValue(true)] public bool EnableCompactMediumWorldTitle { get; set; }
     [DefaultValue(WorldSizeID.Medium)] public WorldSizeID DefaultWorldSize { get; set; }
 }
