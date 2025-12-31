@@ -9,9 +9,6 @@ using Terraria.GameContent.UI.States;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
-using Terraria.WorldBuilding;
-#pragma warning disable CS0414 // Field is assigned but its value is never used
-#pragma warning disable CS0169 // Field is never used
 
 namespace ExtraWorldSizes.Common;
 
@@ -68,15 +65,14 @@ public static class ExtraUIWorldCreation
         }
 
         var evilButtons = (Array)typeof(UIWorldCreation).GetField("_evilButtons", BindingFlags.Instance | BindingFlags.NonPublic)?.GetValue(self);
-        if (evilButtons != null)
+        if (evilButtons == null) return;
+        
+        foreach (var button in evilButtons)
         {
-            foreach (var button in evilButtons)
-            {
-                if (button == null) continue;
+            if (button == null) continue;
                 
-                var methodInfo = button.GetType().GetMethod("SetCurrentOption", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-                methodInfo?.Invoke(button, new[] { Enum.ToObject(button.GetType().GenericTypeArguments[0], 0) });
-            }
+            var methodInfo = button.GetType().GetMethod("SetCurrentOption", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            methodInfo?.Invoke(button, new[] { Enum.ToObject(button.GetType().GenericTypeArguments[0], 0) });
         }
     }
     private static void On_AddWorldSizeOptions(On_UIWorldCreation.orig_AddWorldSizeOptions orig, UIWorldCreation self, UIElement container, float accumulatedHeight, UIElement.MouseEvent clickEvent, string tagGroup, float usableWidthPercent)
