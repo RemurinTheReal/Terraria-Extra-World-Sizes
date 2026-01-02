@@ -35,6 +35,7 @@ public static class ExtraUIWorldCreation
         On_UIWorldCreation.SetDefaultOptions += On_SetDefaultOptions;
         On_UIWorldCreation.AddWorldSizeOptions += On_AddWorldSizeOptions;
         IL_UIWorldCreation.FinishCreatingWorld += Il_FinishCreationWorld;
+        On_UIWorldCreation.UpdateSliders += On_UIWorldCreationOnUpdateSliders;
     }
 
     public static void OnUnload()
@@ -42,9 +43,49 @@ public static class ExtraUIWorldCreation
         On_UIWorldCreation.SetDefaultOptions -= On_SetDefaultOptions;
         On_UIWorldCreation.AddWorldSizeOptions -= On_AddWorldSizeOptions;
         IL_UIWorldCreation.FinishCreatingWorld -= Il_FinishCreationWorld;
+        On_UIWorldCreation.UpdateSliders -= On_UIWorldCreationOnUpdateSliders;
     }
 
+ 
+
     #region Hooks
+    private static void On_UIWorldCreationOnUpdateSliders(On_UIWorldCreation.orig_UpdateSliders orig, UIWorldCreation self)
+    {
+        foreach (var t in _sizeButtons)
+        {
+            t.SetCurrentOption(_sizeChoice);
+        }
+        
+        var difficultyButtons = (Array)typeof(UIWorldCreation).GetField("_difficultyButtons", BindingFlags.Instance | BindingFlags.NonPublic)?.GetValue(self);
+        if (difficultyButtons != null)
+        {
+            foreach (var button in difficultyButtons)
+            {
+                if (button == null) continue;
+
+                var difficultyChoiceField = button.GetType().GetField("_optionDifficulty", BindingFlags.NonPublic | BindingFlags.Instance);
+                if (difficultyChoiceField == null) continue;
+                
+                var methodInfo = button.GetType().GetMethod("SetCurrentOption", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                methodInfo?.Invoke(button, new[] { Enum.ToObject(button.GetType().GenericTypeArguments[0], difficultyChoiceField.GetValue(button) ?? 0) });
+            }
+        }
+
+        var evilButtons = (Array)typeof(UIWorldCreation).GetField("_evilButtons", BindingFlags.Instance | BindingFlags.NonPublic)?.GetValue(self);
+        if (evilButtons == null) return;
+        
+        foreach (var button in evilButtons)
+        {
+            if (button == null) continue;
+            
+            var evilChoiceField = button.GetType().GetField("_optionEvil", BindingFlags.NonPublic | BindingFlags.Instance);
+            if (evilChoiceField == null) continue;
+                
+            var methodInfo = button.GetType().GetMethod("SetCurrentOption", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            methodInfo?.Invoke(button, new[] { Enum.ToObject(button.GetType().GenericTypeArguments[0], evilChoiceField.GetValue(button) ?? 0) });
+        }
+    }
+    
     private static void On_SetDefaultOptions(On_UIWorldCreation.orig_SetDefaultOptions orig, UIWorldCreation self)
     {
         AssignRandomWorldName(self);

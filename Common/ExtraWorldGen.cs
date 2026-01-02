@@ -1,4 +1,5 @@
 ﻿using Terraria;
+using Terraria.UI;
 using static Terraria.WorldGen;
 
 namespace ExtraWorldSizes.Common;
